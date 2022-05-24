@@ -1,0 +1,22 @@
+{
+  "name": "xstate-case-examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BoBeenLee/xstate-case-examples.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BoBeenLee/xstate-case-examples/issues"
+  },
+  "homepage": "https://github.com/BoBeenLee/xstate-case-examples#readme",
+  "dependencies": {
+    "xstate": "^4.32.1"
+  }
+}
