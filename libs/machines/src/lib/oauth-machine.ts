@@ -2,59 +2,64 @@ import { createMachine, assign } from "xstate";
 
 export const oauthMachine =
 
-    /** @xstate-layout N4IgpgJg5mDOIC5QHsCGBXALgCwLKoGNsBLAOzADoBlYqUgSVIGIr6BxAOQH16PFQADsljFMxZKX4gAHogCMADgCcFBQDYArAGYADAHYALHr1qlChQCYANCACeiLXJ0U1uvRosG1FnTqUGAXwCbNCw8QhJyaloGUgB1UWwABQAnZAA3YggwFKYICUoydOQAa0pQnHwiMkoaOkYEnFSMrJyEIuQCVDEJAG0dAF0pIREeySQZRD1zCiVdU0VFHw09G3sECw0VJTkVrTmLPSdLPSCQjEqImuj6+MTmzOzcnLSUigEAG26AM2QUgFsKBVwtUonVYo1kmlHm0Ol0xv0hhMRqJxONQLIEHIlCoPIdvAotJYiV41vI9FoKBpfHozDitBZdhYtGcQMCqpFKGwwJgAKqwHKQh6tXL5KIdMpAi4gzkUbl8gUpIXQkXtUjFeFoxHDYSoiRSTFyRlyCjGPQWBR+RSGCzWOzyW0UAxKLYGORaNR6HSKdSs9lXKLy-mC+4qp5MF5-d5fTC-AFSsIc65BxXKlpPNUa7pawY60Zog2INQKPSzQ46RnFik41b2rE6AwUOSaZsWNQGHQrdss1mkZDZeATf2g2oxRh5vXoyYIAx29ZyJxOnQKBcadRqCtaIl+6VJsFju5NMM5CdjQsz51OzYrrSz7zMpRkjZaDRU4xKW3HDwdwLBNm7gMuR5YMlVDdMT2RXUzwmTE5hNC1LEOCwzApdsnyUZwcQ0N0K2Q3QjV-c5E0Aih8DIU8Cxg+QDDXJsaIbDw5DdAknwXNQnQwhtZzXAlkJ3YiRwo-UqKxBRWIUChfCk5D200HQtGmIIgiAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QHsCGBXALgCwLKoGNsBLAOzADoBlYqUgSVIGIr6BxAOQH16PFQADsljFMxZKX4gAHogCcADgBsFJQBYA7ACYADHK1qlW-WoA0IAJ6IAzBoUUFARgCscpY6XONOtV4C+fuZoWHiEJOTUtAykAOqi2AAKAE7IAG7EEGBJTBASlGSpyADWlME4+ERklDR0jHE4yWkZWQgFyASoYhIA2joAulJCIl2SSDLyyqqauiZGJuZWCHI6FHJyztbKmgpaCmqaAUEY5WFVkbWx8Y3pmdlZKUkUAgA2nQBmyEkAthRloZURGrReqJFI3FptDojXoDMZDUTiUagWRLBRyVQbJRuRyOAwaZwKBaIYyOBxqLQeZb4nFKayHEB-CrhShsMCYACqsCyIOuzWyuQibRKv2O-2ZFFZHK5SR5YL5rVIhShiJhg2ECIkUhR1lsFDUaJ0jgUOic3g0cg0RIQFOcerk1n0G28WlpBnpjNOEUlnO5VzltyY90+T1emA+3xFISZZ290tlTVuCqVnRV-TVw0RWpsuv1yyNJscZotVusBL1Cnxu2cOnNagd7tF0Yi+DILHY3AA8uyACrpjVI8YIM0UYwW5y+PRqHFWrTWNSrBRotHuVyeXEBQIgUjITLwMYegHVKKMPsjLMIBQ6slTvQadyOTZaEubCjWDy7bQ7HSGxwNqOeo8LnjcEklPTMxhRXFdAoXEdE8CtHB0WdLxnWkyQLQtvwfHQNj-E5DwlNkfRlP0EyyMDNQgxByRnfQ7V0NFZxw+06U3A9xRbAd4TPKiEAJawHGcTw5HJI0nAUZwZ0Q8ttCNZxZ3HDRWKOf9DwogdIMJSxECNChv30gzDI0Dc-CAA */
     createMachine(
         {
   context: {},
-  tsTypes: {} as import("./oauth-machine.typegen").Typegen0,
-  initial: "SignIn",
-  id: "oauthMachine",
+  tsTypes: {} as import('./oauth-machine.typegen').Typegen0,
+  initial: 'SignIn',
+  id: 'oauthMachine',
   states: {
     SignIn: {
-      description: "App 로그인 페이지",
+      description: 'App 로그인 페이지',
       on: {
         SIGN_IN: {
-          target: "SignInWithProvider",
+          target: 'SignInWithProvider',
         },
       },
     },
     SignInWithProvider: {
-      description: "Google, Facebook, Github 로그인 팝업 페이지",
+      description: 'Google, Facebook, Github 로그인 팝업 페이지',
       invoke: {
-        src: "signInWithProvider",
+        src: 'signInWithProvider',
         onDone: [
           {
-            target: "GetUserWithProvider",
+            target: 'GetUserWithProvider',
           },
         ],
         onError: [
           {
-            actions: "showErrorMessage",
-            target: "SignIn",
+            actions: 'showErrorMessage',
+            target: 'SignIn',
           },
         ],
       },
     },
     GetUserWithProvider: {
-      description: "provider user api 조회",
+      description: 'provider user api 조회',
       invoke: {
-        src: "getUserWithProvider",
+        src: 'getUserWithProvider',
         onDone: [
           {
-            actions: "setProviderUserContext",
-            target: "Main",
+            actions: 'setProviderUserContext',
+            target: 'Main',
           },
         ],
         onError: [
           {
-            actions: "showErrorMessage",
-            target: "SignIn",
+            actions: 'showErrorMessage',
+            target: 'SignIn',
           },
         ],
       },
     },
     Main: {
-      description: "메인 화면",
+      description: '메인 화면',
+      on: {
+        SIGN_OUT: {
+          target: 'SignIn',
+        },
+      },
     },
   },
 });
