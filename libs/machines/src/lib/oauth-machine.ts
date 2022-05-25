@@ -2,16 +2,15 @@ import { createMachine, assign } from "xstate";
 
 export const oauthMachine =
 
-    /** @xstate-layout N4IgpgJg5mDOIC5QHsCGBXALgCwLKoGNsBLAOzADoBlYqUgSVIGIr6BxAOQH16PFQADsljFMxZKX4gAHogCcADgBsFJQBYA7ACYADHK1qlW-WoA0IAJ6IAzBoUUFARgCscpY6XONOtV4C+fuZoWHiEJOTUtAykAOqi2AAKAE7IAG7EEGBJTBASlGSpyADWlME4+ERklDR0jHE4yWkZWQgFyASoYhIA2joAulJCIl2SSDLyyqqauiZGJuZWCHI6FHJyztbKmgpaCmqaAUEY5WFVkbWx8Y3pmdlZKUkUAgA2nQBmyEkAthRloZURGrReqJFI3FptDojXoDMZDUTiUagWRLBRyVQbJRuRyOAwaZwKBaIYyOBxqLQeZb4nFKayHEB-CrhShsMCYACqsCyIOuzWyuQibRKv2O-2ZFFZHK5SR5YL5rVIhShiJhg2ECIkUhR1lsFDUaJ0jgUOic3g0cg0RIQFOcerk1n0G28WlpBnpjNOEUlnO5VzltyY90+T1emA+3xFISZZ290tlTVuCqVnRV-TVw0RWpsuv1yyNJscZotVusBL1Cnxu2cOnNagd7tF0Yi+DILHY3AA8uyACrpjVI8YIM0UYwW5y+PRqHFWrTWNSrBRotHuVyeXEBQIgUjITLwMYegHVKKMPsjLMIBQ6slTvQadyOTZaEubCjWDy7bQ7HSGxwNqOeo8LnjcEklPTMxhRXFdAoXEdE8CtHB0WdLxnWkyQLQtvwfHQNj-E5DwlNkfRlP0EyyMDNQgxByRnfQ7V0NFZxw+06U3A9xRbAd4TPKiEAJawHGcTw5HJI0nAUZwZ0Q8ttCNZxZ3HDRWKOf9DwogdIMJSxECNChv30gzDI0Dc-CAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QHsCGBXALgCwLKoGNsBLAOzADoAbZKGCAeSwGIBlASQHEA5AfXe6JQAB2SximYslJCQAD0QBGAAwBmZRQBMANk0AOACwBONdoCsAdgOaANCACeiTToqrFexdpM7Peo6oBfALs0LDxCEnIKcShSdlIAdQlsAAUAJ2QAN2IIMDTmCGlKMkzkAGtKUJx8IjJKGLjE5PSsnLyEEuQCVElpAG1lAF1ZUXFemSR5JTUNHX1jU0trO0cEAwsjCiNtRX9lPWUDPQ8jAyCQjGqIuujiWPiknBbs3Py8jLSKYSoegDNkNIAWwoVXCtSiDQezQyL3anW64wGw0mowkUgmoAUCBUqlUWm0R2UZjMegJqisKyUqk2qks2wMBjcFlp7nOIFBNUilBgmAAqrA8o9UjC2vlClFOhUQZcwVyKDz+YLoa1Xh1SKUEeikSMxGjpLIsbiLBR1kZthZNIpNMptLaDJSENazFtTvpybTmYFguyZZybgqBWkhc9Rcx3gCvj9MP8gdKwn6ogGlU8Rar4T0tUMdWN0QbEEaTRtzZbrbaCQ7VJaTUYraoDGY66TDmdvRzrlEaHRIPE2Fw+AxeQAVbN6jFTBDM53KZRmgyKCxWfYOy3aE2kutGCx+OvaVR6Nlt8GUIhgAhlMhQdi-AAytHoPfFxXV5Uqvvbx+wp-PpEvN7v3dINUNQzfosxRXVxjzBAC1NYsrRtO0HUUEkKGUZDnEXMw52tfdWzfI8KBPM8LyvW8uwgHtw0+b4-gBYFDzlIjv1-Mj70A9NETAkQINzSZDXJQszW0C14LLe0HEQEwXX2IxrS3PQty8IJvVIZBcngSYGJuTt6CYTAR0gvjEFJRQKAbXc0J0BcDF0ZcVDXZtNDnPw9k0A98LlSEmhTFU8gM3jMSUHQDAoRQwuMAwbV2VQkIsVdcWUDZGTMJyLU0Mx3Pjd95TAPlA2DVM-PAnN9SMtZbAk8qQotNxzAZBT6W0TKrgInSAP80rAoQEkQucTR-CctCLGUTQLDsjRCQZJz3DNL0LiygimJIv9yPiDqxyxYStmQxKjBJMLp2OJCZwoPRLD3BSLpUfxmtlOp1qg9wkL0VDpze963sUFsgiAA */
     createMachine(
         {
   context: {},
   tsTypes: {} as import('./oauth-machine.typegen').Typegen0,
-  initial: 'signIn',
+  initial: 'loggedOut',
   id: 'oauthMachine',
   states: {
-    signIn: {
-      description: 'App 로그인 페이지',
+    loggedOut: {
       on: {
         SIGN_IN: {
           target: 'signInWithProvider',
@@ -30,35 +29,48 @@ export const oauthMachine =
         onError: [
           {
             actions: 'showErrorMessage',
-            target: 'signIn',
+            target: 'loggedOut',
           },
         ],
       },
     },
     getUserWithProvider: {
-      description: 'provider user api 조회',
       invoke: {
         src: 'getUserWithProvider',
         onDone: [
           {
             actions: 'setProviderUserContext',
-            target: 'main',
+            target: 'loggedIn',
           },
         ],
         onError: [
           {
             actions: 'showErrorMessage',
-            target: 'signIn',
+            target: 'loggedOut',
           },
         ],
       },
     },
-    main: {
-      description: '메인 화면',
+    loggedIn: {
       on: {
         SIGN_OUT: {
-          target: 'signIn',
+          target: 'loggedOut',
         },
+      },
+    },
+    checkingIfLoggedIn: {
+      invoke: {
+        src: 'checkIfLoggedIn',
+        onDone: [
+          {
+            target: 'loggedIn',
+          },
+        ],
+        onError: [
+          {
+            target: 'loggedOut',
+          },
+        ],
       },
     },
   },
