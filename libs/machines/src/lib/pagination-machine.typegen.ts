@@ -3,18 +3,29 @@
 export interface Typegen0 {
   '@@xstate/typegen': true;
   eventsCausingActions: {
-    setPaginationContext: 'done.invoke.paginationMachine.fetching:invocation[0]';
-    showErrorMessage: 'error.platform.paginationMachine.fetching:invocation[0]';
+    setPaginationContext:
+      | 'UPDATE_TOTAL_COUNT'
+      | 'CHANGE_CURRENT_PAGE'
+      | 'CHANGE_PAGE_SIZE'
+      | 'NEXT_PAGE'
+      | 'PREVIOUS_PAGE';
+    goToFirstPage: 'UPDATE_TOTAL_COUNT';
+    showErrorMessage:
+      | 'CHANGE_CURRENT_PAGE'
+      | 'NEXT_PAGE'
+      | 'PREVIOUS_PAGE'
+      | 'error.platform.paginationMachine.fetching:invocation[0]';
+    updatePaginations: 'done.invoke.paginationMachine.fetching:invocation[0]';
   };
   internalEvents: {
+    'error.platform.paginationMachine.fetching:invocation[0]': {
+      type: 'error.platform.paginationMachine.fetching:invocation[0]';
+      data: unknown;
+    };
     'done.invoke.paginationMachine.fetching:invocation[0]': {
       type: 'done.invoke.paginationMachine.fetching:invocation[0]';
       data: unknown;
       __tip: 'See the XState TS docs to learn how to strongly type this.';
-    };
-    'error.platform.paginationMachine.fetching:invocation[0]': {
-      type: 'error.platform.paginationMachine.fetching:invocation[0]';
-      data: unknown;
     };
     'xstate.init': { type: 'xstate.init' };
   };
@@ -22,7 +33,11 @@ export interface Typegen0 {
     getPaginationByPage: 'done.invoke.paginationMachine.fetching:invocation[0]';
   };
   missingImplementations: {
-    actions: 'setPaginationContext' | 'showErrorMessage';
+    actions:
+      | 'setPaginationContext'
+      | 'goToFirstPage'
+      | 'showErrorMessage'
+      | 'updatePaginations';
     services: 'getPaginationByPage';
     guards:
       | 'currentPageIsNotAboveNewTotalPages'
