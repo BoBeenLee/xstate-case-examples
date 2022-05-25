@@ -7,57 +7,57 @@ export const oauthMachine =
         {
   context: {},
   tsTypes: {} as import('./oauth-machine.typegen').Typegen0,
-  initial: 'SignIn',
+  initial: 'signIn',
   id: 'oauthMachine',
   states: {
-    SignIn: {
+    signIn: {
       description: 'App 로그인 페이지',
       on: {
         SIGN_IN: {
-          target: 'SignInWithProvider',
+          target: 'signInWithProvider',
         },
       },
     },
-    SignInWithProvider: {
+    signInWithProvider: {
       description: 'Google, Facebook, Github 로그인 팝업 페이지',
       invoke: {
         src: 'signInWithProvider',
         onDone: [
           {
-            target: 'GetUserWithProvider',
+            target: 'getUserWithProvider',
           },
         ],
         onError: [
           {
             actions: 'showErrorMessage',
-            target: 'SignIn',
+            target: 'signIn',
           },
         ],
       },
     },
-    GetUserWithProvider: {
+    getUserWithProvider: {
       description: 'provider user api 조회',
       invoke: {
         src: 'getUserWithProvider',
         onDone: [
           {
             actions: 'setProviderUserContext',
-            target: 'Main',
+            target: 'main',
           },
         ],
         onError: [
           {
             actions: 'showErrorMessage',
-            target: 'SignIn',
+            target: 'signIn',
           },
         ],
       },
     },
-    Main: {
+    main: {
       description: '메인 화면',
       on: {
         SIGN_OUT: {
-          target: 'SignIn',
+          target: 'signIn',
         },
       },
     },
