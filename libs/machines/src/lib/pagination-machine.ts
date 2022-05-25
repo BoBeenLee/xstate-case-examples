@@ -4,9 +4,9 @@ import { createMachine, assign } from "xstate";
 const DEFAULT_PAGE_SIZE = 10;
 
 export const paginationMachine =
-
-    /** @xstate-layout N4IgpgJg5mDOIC5QAcCGUCWA7VAXDA9lgLKoDGAFtmAHQYQA2YAxAMIASAggHIDiAogH1WAVQBKY-twAqggAqcBiFAVgZ8RZSAAeiAKwAGAGw0jegIwAmAOyXL58wA4AnABY9AGhABPRI8c0rkbmRqFGrg4G5gDMegC+cV5omDgaJORUWLT0TGxcfEIKAoIAygCSAFr8Wsiq6oRYWroILtE05s5RetHRRo69-V6+CCZBVq497gYGeq7OzglJ6Nh4DaSU1HSMLNz8ABqyRdVIILVqaU2I7tY01s7Rlq6Oxj1m5kOI0c6WNHqO1v0Qs5rEZLP5rItTstUmsMpsciw5JIAGplADyIhK8kUxxU5walwQEwCnUcc0i1msenunh8iGsMVudl60SpA1ZkOSKzS60ytAAZmBcBssFBmBAiNksAA3AgAa1oXJhRF5m0FwsyUAQ2FlZFWRAA2gYALo1OoXE7NSwGZy3cLRAyWaKuWz2eYfBBuNruUGWPrAsyWTnQ-XpEUCoUisVgABOMYIMZoyAYeH5CYAtkmQzy4VkaOqo9qZQQ9WkjaaTmd6ppLX5zIEbEY7k6LL1nEYPeYDHNTBFHH1rH32+ZgylQ6qsswRHIACKcaRCaRo6ScAAywgxMjN+JroGaelCNGmwT9fxBZOcHoAtDZ6-4bHowd9nIZ+wlEiAsAQIHAatnYeGWxMNu1aNLWCBWA6vzTE4eiGAYzr3J2xg-EY0Rdo+B6dLE8Qfkq465hGGrYFAIEWnuiBOAEYQhHMj5ksE16Hv2ehUrMBjWKyr6jtyAF8mRBLgaxDYgs2sQxEY7auNesQmP8jgxI+NixH60TvnEQA */
-    createMachine(
+    
+/** @xstate-layout N4IgpgJg5mDOIC5QAcCGUCWA7VAXDA9lgLKoDGAFtmAHQYQA2YAxAKoAKAIgIIAqAogH0AwqwBKY-gDleg9twDi-RCgKwM+IipAAPRABYA7AAYaANgCcADgDMNs4asX9VgExmArABoQAT0Q2HgCM5jZWVh42+q5BVkFhHgC+iT5omDiaJORUWLT0TGxcfELySoIAygCSAFrKSCDIahqEWNp6CG5WNBYJFobB7mY2Pv4I0RY0rvYOrrM2hjZBHkkpDejYeC2klNR0jCxS-AAasqV1quqZbYgAtK76+jQe+mbGQ28vy2b6I4huht1Au9lv0zLZkql1hkttldvkWOxJAA1SoAeVY5TkinODSaV3q7RuHgBFiChlchleA1sxkMvwQkQ8NDexhsFgpZiCtNcVgha3SmyI2xytAAZmBcDssFBmBAiHksAA3AgAa1oaQ2mWFu3FkpyUAQ2GVZEFWAA2sYALraRqXFrXBA3B4TV5WFwOOwWPquelBIKc0IWTzGYxWYxBHoWPka6FC2G5Gi6qUysAAJ1TBFTNGQDDwoszAFts1DTdqE0n9YalQQTZkLdb6rbmloCbcFhMbDEghyXAtHL7jMsaAt7K5It2lvpoyWtfGWBweAJBLxUbxuAAZETomQ2vH21tjH1+RBDcxmKazL1hl5WfrJVZYAgQOA2mcwqV5fa7u0t0DtLnuMO3aumCnJsr6SxMvosRuMYFK0tE04CrOH6JhKybfs2rQHk6YLdM8+hwXBHiDkY9JsiEDhvE41j2HB9xIZq74iph+J-m2p6dn6Pa3vMVj0ncIR2DYxgWIOrycsY+g2PeiRAA */
+createMachine(
         {
   context: { currentPage: 0, pageSize: DEFAULT_PAGE_SIZE, totalCount: 0 },
   tsTypes: {} as import('./pagination-machine.typegen').Typegen0,
@@ -16,16 +16,41 @@ export const paginationMachine =
       pageSize: number;
       totalCount: number;
     },
+    events: {} as
+      | {
+          type: 'UPDATE_TOTAL_COUNT';
+          totalCount: number;
+        }
+      | {
+          type: 'UPDATE_PAGE_SIZE';
+          pageSize: number;
+        }
+      | {
+          type: 'UPDATE_CURRENT_PAGE';
+          currentPage: number;
+        }
+      | {
+          type: 'NEXT_PAGE';
+        }
+      | {
+          type: 'PREVIOUS_PAGE';
+        },
+    services: {} as {
+      getPaginationByPage: {
+        // The data that gets returned from the service
+        data: { id: string };
+      };
+    },
   },
   on: {
     UPDATE_TOTAL_COUNT: [
       {
-        actions: 'setPaginationContext',
+        actions: 'setTotalCountContext',
         cond: 'currentPageIsNotAboveNewTotalPages',
         target: '.idle',
       },
       {
-        actions: ['setPaginationContext', 'goToFirstPage'],
+        actions: ['setTotalCountContext', 'goToFirstPage'],
         target: '.fetching',
       },
     ],
@@ -35,9 +60,9 @@ export const paginationMachine =
   states: {
     idle: {
       on: {
-        CHANGE_CURRENT_PAGE: [
+        UPDATE_CURRENT_PAGE: [
           {
-            actions: 'setPaginationContext',
+            actions: 'setCurrentPageContext',
             cond: 'currentPageIsBelowTotalPages',
             target: 'fetching',
           },
@@ -45,13 +70,13 @@ export const paginationMachine =
             actions: 'showErrorMessage',
           },
         ],
-        CHANGE_PAGE_SIZE: {
-          actions: 'setPaginationContext',
+        UPDATE_PAGE_SIZE: {
+          actions: 'setCurrentPageSizeContext',
           target: 'fetching',
         },
         NEXT_PAGE: [
           {
-            actions: 'setPaginationContext',
+            actions: 'setNextPageContext',
             cond: 'currentPageIsNotAboveTotalPages',
             target: 'fetching',
           },
@@ -61,7 +86,7 @@ export const paginationMachine =
         ],
         PREVIOUS_PAGE: [
           {
-            actions: 'setPaginationContext',
+            actions: 'setPreviousPageContext',
             cond: 'currentPageIsEqualToOrAboveThanZero',
             target: 'fetching',
           },
@@ -76,7 +101,6 @@ export const paginationMachine =
         src: 'getPaginationByPage',
         onDone: [
           {
-            actions: 'updatePaginations',
             target: 'idle',
           },
         ],
@@ -89,4 +113,35 @@ export const paginationMachine =
       },
     },
   },
+}, {
+  actions: {
+    goToFirstPage: assign({
+      currentPage: (context, event) => 0,
+    }),
+    setCurrentPageContext: assign({
+      currentPage: (context, event) => event.currentPage,
+    }),
+    setCurrentPageSizeContext: assign({
+      pageSize: (context, event) => event.pageSize,
+    }),
+    setNextPageContext: assign({
+      currentPage: (context, event) => context.currentPage + 1,
+    }),
+    setPreviousPageContext: assign({
+      currentPage: (context, event) => context.currentPage - 1,
+    }),
+    setTotalCountContext: assign({
+      totalCount: (context, event) => event.totalCount,
+    }),
+    showErrorMessage: (context, event) => {
+      // TODO
+    },
+  },
+  services: {
+    getPaginationByPage: async () => {
+      return {
+        id: '1',
+      }
+    },
+  }
 });

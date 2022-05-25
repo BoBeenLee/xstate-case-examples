@@ -3,29 +3,22 @@
 export interface Typegen0 {
   '@@xstate/typegen': true;
   eventsCausingActions: {
-    setPaginationContext:
-      | 'UPDATE_TOTAL_COUNT'
-      | 'CHANGE_CURRENT_PAGE'
-      | 'CHANGE_PAGE_SIZE'
-      | 'NEXT_PAGE'
-      | 'PREVIOUS_PAGE';
+    setTotalCountContext: 'UPDATE_TOTAL_COUNT';
     goToFirstPage: 'UPDATE_TOTAL_COUNT';
+    setCurrentPageContext: 'UPDATE_CURRENT_PAGE';
     showErrorMessage:
-      | 'CHANGE_CURRENT_PAGE'
+      | 'UPDATE_CURRENT_PAGE'
       | 'NEXT_PAGE'
       | 'PREVIOUS_PAGE'
       | 'error.platform.paginationMachine.fetching:invocation[0]';
-    updatePaginations: 'done.invoke.paginationMachine.fetching:invocation[0]';
+    setCurrentPageSizeContext: 'UPDATE_PAGE_SIZE';
+    setNextPageContext: 'NEXT_PAGE';
+    setPreviousPageContext: 'PREVIOUS_PAGE';
   };
   internalEvents: {
     'error.platform.paginationMachine.fetching:invocation[0]': {
       type: 'error.platform.paginationMachine.fetching:invocation[0]';
       data: unknown;
-    };
-    'done.invoke.paginationMachine.fetching:invocation[0]': {
-      type: 'done.invoke.paginationMachine.fetching:invocation[0]';
-      data: unknown;
-      __tip: 'See the XState TS docs to learn how to strongly type this.';
     };
     'xstate.init': { type: 'xstate.init' };
   };
@@ -33,12 +26,8 @@ export interface Typegen0 {
     getPaginationByPage: 'done.invoke.paginationMachine.fetching:invocation[0]';
   };
   missingImplementations: {
-    actions:
-      | 'setPaginationContext'
-      | 'goToFirstPage'
-      | 'showErrorMessage'
-      | 'updatePaginations';
-    services: 'getPaginationByPage';
+    actions: never;
+    services: never;
     guards:
       | 'currentPageIsNotAboveNewTotalPages'
       | 'currentPageIsBelowTotalPages'
@@ -49,14 +38,14 @@ export interface Typegen0 {
   eventsCausingServices: {
     getPaginationByPage:
       | 'UPDATE_TOTAL_COUNT'
-      | 'CHANGE_CURRENT_PAGE'
-      | 'CHANGE_PAGE_SIZE'
+      | 'UPDATE_CURRENT_PAGE'
+      | 'UPDATE_PAGE_SIZE'
       | 'NEXT_PAGE'
       | 'PREVIOUS_PAGE';
   };
   eventsCausingGuards: {
     currentPageIsNotAboveNewTotalPages: 'UPDATE_TOTAL_COUNT';
-    currentPageIsBelowTotalPages: 'CHANGE_CURRENT_PAGE';
+    currentPageIsBelowTotalPages: 'UPDATE_CURRENT_PAGE';
     currentPageIsNotAboveTotalPages: 'NEXT_PAGE';
     currentPageIsEqualToOrAboveThanZero: 'PREVIOUS_PAGE';
   };
