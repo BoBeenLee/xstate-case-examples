@@ -28,11 +28,7 @@ export interface Typegen0 {
   missingImplementations: {
     actions: never;
     services: never;
-    guards:
-      | 'currentPageIsNotAboveNewTotalPages'
-      | 'currentPageIsBelowTotalPages'
-      | 'currentPageIsNotAboveTotalPages'
-      | 'currentPageIsEqualToOrAboveThanZero';
+    guards: never;
     delays: never;
   };
   eventsCausingServices: {
@@ -46,8 +42,8 @@ export interface Typegen0 {
   eventsCausingGuards: {
     currentPageIsNotAboveNewTotalPages: 'UPDATE_TOTAL_COUNT';
     currentPageIsBelowTotalPages: 'UPDATE_CURRENT_PAGE';
-    currentPageIsNotAboveTotalPages: 'NEXT_PAGE';
-    currentPageIsEqualToOrAboveThanZero: 'PREVIOUS_PAGE';
+    canGoToNextPage: 'NEXT_PAGE';
+    canGoToPreviousPage: 'PREVIOUS_PAGE';
   };
   eventsCausingDelays: {};
   matchesStates: 'idle' | 'fetching';
