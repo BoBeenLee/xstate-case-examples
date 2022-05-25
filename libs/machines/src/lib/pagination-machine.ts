@@ -5,37 +5,57 @@ const DEFAULT_PAGE_SIZE = 10;
 
 export const paginationMachine =
 
-    /** @xstate-layout N4IgpgJg5mDOIC5QAcCGUCWA7VAXDA9lgLKoDGAFtmAHQCSEANmAMQDCAEgIIByA4gFEA+mwCqAJXECeAFSEAFLoMQoCsDPiIqQAD0QAWAOwAGGgGYATAE4AbFYAch-WZeGrZgDQgAnoitWaCwszY0MbAFZ9cONjfX0bAF8ErzRMHE0SciosWgZmdm5+YUVBIQBlOgAtAW1kNQ1CLG09BDt9GlCrQzN9C3sowwBGKy9fBABaHpp7CKCrXv1YqySU9Gw8RtJKahoAMTBcbawoFggiWmwANwIAa1pU9Yyt7Np9w+yoBCuCMg2iAG1jABdWr1DLNRAhUwWRZOYyDcI9GyDQyjRAWQamaL2CzwwY2IxWcLuFYgB7pTZZHZvI4nMAAJ3pBHpNGQjDwADNmQBbVlrClEZ7Ug60r5Ya6-DKAkFIMlgxoQhCDQZmQIOEx2XH2EKGVE+SEWGyBBGzEwq5XhQxJZIgLAECBwWr8v6ZI65JhgUHqcGylrdQY0KLhezBmw2WIRfRohBmYY0ExdRZa8KG4yJG3kl1CnJ7EUfL0NLS+xCDez2Ghh5EEol9eKDaPjMPTCKGcKRUJmVvGeykzNPKk5As+0AtewBayONNWLU6vVjcYqgIzZXh7rGMzhFFW61AA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QAcCGUCWA7VAXDA9lgLKoDGAFtmAHQYQA2YAxAMIASAggHIDiAogH1WAVQBKY-twAqggAqcBiFAVgZ8RZSAAeiABwAGAKw0AzEYCcAFgBsNgIz3Tpi-YBMAGhABPRPZPGBm4A7G42oeFGem5WAL6xXmiYOBok5FRYtPRMbFx8QgoCggDKAJIAWvxayKrqhFhaugiOpno0wVHGURbRpsHBXr4IALTONEbuFjYGpvZ6FsGmtvGJ6Nh49aSU1HSMLNz8ABqyhVVIIDVqqY2IDm32wQbB9lZLE3o2g36tNHZ69hYwq0bEZpnoVhc1ilNukdtkWHJJAA1UoAeRExXkijOKiu9RuCCMYRoAP6Vi6gI6pi+CDcelMJMW5gW5jcBhmEKS61SWwytAAZmBcNssFBmBAiFksAA3AgAa1oXOhRF5O0FwoyUAQ2FlZA2RAA2gYALrVWrXc5NZxtAx2R5BKxOCxvGm2NpEixGPp6ckvD6cqH6tIigVCkVisAAJ0jBEjNGQDDw-NjAFt44GebDMjR1eHtTKCHrUkbTedLnVNJbEGyLO1TOz+pN6z7qT5EEZglZ2v4HlMW4DwQlIckg6rMswRHIACKcaRCaSo6ScAAywnRMjNeMroCaoJsNHZDjCUWCNh9FhpwxC9hoemiHTpgM9Bn9EKwBAgcGqGZhId2TE3CsGirBALE9GgQhsY8AWtGxWyGaY3Agj4ojcfx60dUwAxHTM-1zTVAItHc-DvX47HsGwrE9OlbHsS87FvEEOiMclFg6F9sO5X8+UI-EQIors7AcSjqJ9BxL3Mfc9GCf4rFeF9rFBeJ4iAA */
     createMachine(
         {
-  context: { currentPage: 0, pageSize: DEFAULT_PAGE_SIZE },
+  context: { currentPage: 0, pageSize: DEFAULT_PAGE_SIZE, totalCount: 0 },
   tsTypes: {} as import('./pagination-machine.typegen').Typegen0,
-  initial: 'Fetching',
+  on: {
+    UPDATE_TOTAL_COUNT: [
+      {
+        cond: 'currentPageIsNotAboveNewTotalPages',
+        target: '.idle',
+      },
+      {
+        target: '.fetching',
+      },
+    ],
+  },
+  initial: 'fetching',
   id: 'paginationMachine',
   states: {
-    Idle: {
+    idle: {
       on: {
         CHANGE_CURRENT_PAGE: {
-          target: 'Fetching',
+          cond: 'currentPageIsBelowTotalPages',
+          target: 'fetching',
         },
         CHANGE_PAGE_SIZE: {
-          target: 'Fetching',
+          target: 'fetching',
+        },
+        NEXT_PAGE: {
+          cond: 'currentPageIsNotAboveTotalPages',
+          target: 'fetching',
+        },
+        PREVIOUS_PAGE: {
+          cond: 'currentPageIsEqualToOrAboveThanZero',
+          target: 'fetching',
         },
       },
     },
-    Fetching: {
+    fetching: {
       invoke: {
         src: 'getPaginationByPage',
         onDone: [
           {
             actions: 'setPaginationContext',
-            target: 'Idle',
+            target: 'idle',
           },
         ],
         onError: [
           {
             actions: 'showErrorMessage',
-            target: 'Idle',
+            target: 'idle',
           },
         ],
       },
