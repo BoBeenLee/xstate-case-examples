@@ -2,25 +2,25 @@ import { createMachine, assign } from "xstate";
 
 export const oauthMachine =
 
-    /** @xstate-layout N4IgpgJg5mDOIC5QHsCGBXALgCwLKoGNsBLAOzADoAbZKGCAeSwGIBlASQHEA5AfXe6JQAB2SximYslJCQAD0QBGAAwBmZRQBMANk0AOACwBONdoCsAdgOaANCACeiTToqrFexdpM7Peo6oBfALs0LDxCEnIKcShSdlIAdQlsAAUAJ2QAN2IIMDTmCGlKMkzkAGtKUJx8IjJKGLjE5PSsnLyEEuQCVElpAG1lAF1ZUXFemSR5JTUNHX1jU0trO0cEAwsjCiNtRX9lPWUDPQ8jAyCQjGqIuujiWPiknBbs3Py8jLSKYSoegDNkNIAWwoVXCtSiDQezQyL3anW64wGw0mowkUgmoAUCBUqlUWm0R2UZjMegJqisKyUqk2qks2wMBjcFlp7nOIFBNUilBgmAAqrA8o9UjC2vlClFOhUQZcwVyKDz+YLoa1Xh1SKUEeikSMxGjpLIsbiLBR1kZthZNIpNMptLaDJSENazFtTvpybTmYFguyZZybgqBWkhc9Rcx3gCvj9MP8gdKwn6ogGlU8Rar4T0tUMdWN0QbEEaTRtzZbrbaCQ7VJaTUYraoDGY66TDmdvRzrlEaHRIPE2Fw+AxeQAVbN6jFTBDM53KZRmgyKCxWfYOy3aE2kutGCx+OvaVR6Nlt8GUIhgAhlMhQdi-AAytHoPfFxXV5Uqvvbx+wp-PpEvN7v3dINUNQzfosxRXVxjzBAC1NYsrRtO0HUUEkKGUZDnEXMw52tfdWzfI8KBPM8LyvW8uwgHtw0+b4-gBYFDzlIjv1-Mj70A9NETAkQINzSZDXJQszW0C14LLe0HEQEwXX2IxrS3PQty8IJvVIZBcngSYGJuTt6CYTAR0gvjEFJRQKAbXc0J0BcDF0ZcVDXZtNDnPw9k0A98LlSEmhTFU8gM3jMSUHQDAoRQwuMAwbV2VQkIsVdcWUDZGTMJyLU0Mx3Pjd95TAPlA2DVM-PAnN9SMtZbAk8qQotNxzAZBT6W0TKrgInSAP80rAoQEkQucTR-CctCLGUTQLDsjRCQZJz3DNL0LiygimJIv9yPiDqxyxYStmQxKjBJMLp2OJCZwoPRLD3BSLpUfxmtlOp1qg9wkL0VDpze963sUFsgiAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QHsCGBXALgCwLKoGNsBLAOzADoAbZKGCAeSwGIAZBgcQH0BJAOUSgADsljFMxZKUEgAHogCMAVgAMCigoAsAZgBsAJgXaAnLs0B2fQBoQAT0T7VFABwr9550uPGtzzZoBfAJs0LDxCEnJqWh5SAHVxbAAFACdkADdiCDAU5ggpSjJ05ABrSlCcfCIyShooWIScVIysnIQi5AJUCSkAbRUAXRkRMR7pJDlFVXUtPUMTM0sbewQFNQpvFWdjfyMtnW0gkIxKiJro+vjE5szs3Jy0lIohKm6AM2QUgFsKCvDqqJ1BrXNK3NodLpjfpDCYjcSScageSrVSaDSaJRKczmHa6bTaJSaZaKPEuTSOZxGYzmFSqXRHEB-KqRSgwTAAVVgOUayVBrVy+SiHTKvxO-xZFDZnO5IJad3apGKkIR0OGonhUhkyMp+hclmx2OMzk8zmsdgchgomlc5McHn0-mch2CjLFzPOUq5KR5N35zAen2er0wH2+orC7qinplTT58oh3RVgzVowRWsQOr17gNRpNZpW2gxG3MSidXm0xpU1udxwjZ0BtHosTYnC4DHZABUUxrEZNVoYVFa3DjjFXNEalMSEA7B9SVNSMQTC+ZAi6mfXKEQwAQSmR6m9WI3IM3BYVFaVym6NxQtzu9zwD0eILEFUrE31k7D1WN09PTBQlDMZxdG2LFtH0Ksp3xYwKH0fQ9E0PFNAUPwPAZdcAU3bBt13Uh90POhj1If0UkeIN3k+H4MIlW9cPwp8XwTKFP2Eb80wmZF9H-QDrRA4wwIgolzQQUcNlHY13HJWldDcIIXVIZBsngCZqPOOp6CYTBux-DjFHxXVkJpcw5nMMwhJWeC0VMVRR1UGk7P0dCr0wi5gVjOUcm09ikUUSxnAofYx10bwDA8KcjCUMksVLECqx4py6xc6NvVlMEUi8zVdIQJQFHMCgTH0U1jH0GSdHMKCVDy-VdHMZRSy0LZ6TXZyJXUoiMt7ZE1i8ChdGUFcuONccdCnSyNl0GzaUqqbLAS04XNo+9H0I59ezhHSfIQclRp8AKJqKzw3BUWk5vFGoOt-FDwv847bruu6tDkgIgA */
     createMachine(
         {
   context: {},
   tsTypes: {} as import('./oauth-machine.typegen').Typegen0,
-  initial: 'loggedOut',
+  initial: 'checkingIfLoggedIn',
   id: 'oauthMachine',
   states: {
     loggedOut: {
       on: {
-        SIGN_IN: {
-          target: 'signInWithProvider',
+        LOG_IN: {
+          target: 'logInWithProvider',
         },
       },
     },
-    signInWithProvider: {
+    logInWithProvider: {
       description: 'Google, Facebook, Github 로그인 팝업 페이지',
       invoke: {
-        src: 'signInWithProvider',
+        src: 'logInWithProvider',
         onDone: [
           {
             target: 'getUserWithProvider',
@@ -53,7 +53,7 @@ export const oauthMachine =
     },
     loggedIn: {
       on: {
-        SIGN_OUT: {
+        LOG_OUT: {
           target: 'loggedOut',
         },
       },
@@ -63,7 +63,7 @@ export const oauthMachine =
         src: 'checkIfLoggedIn',
         onDone: [
           {
-            target: 'loggedIn',
+            target: 'getUserWithProvider',
           },
         ],
         onError: [

@@ -7,6 +7,16 @@ export interface Typegen0 {
       | 'error.platform.oauthMachine.logInWithProvider:invocation[0]'
       | 'error.platform.oauthMachine.getUserWithProvider:invocation[0]';
     setProviderUserContext: 'done.invoke.oauthMachine.getUserWithProvider:invocation[0]';
+    navigateToLogInPage:
+      | 'error.platform.oauthMachine.logInWithProvider:invocation[0]'
+      | 'error.platform.oauthMachine.getUserWithProvider:invocation[0]'
+      | 'LOG_OUT'
+      | 'error.platform.oauthMachine.checkingIfLoggedIn:invocation[0]';
+    clearUserContext:
+      | 'error.platform.oauthMachine.logInWithProvider:invocation[0]'
+      | 'error.platform.oauthMachine.getUserWithProvider:invocation[0]'
+      | 'LOG_OUT'
+      | 'error.platform.oauthMachine.checkingIfLoggedIn:invocation[0]';
   };
   internalEvents: {
     'error.platform.oauthMachine.logInWithProvider:invocation[0]': {
@@ -21,6 +31,10 @@ export interface Typegen0 {
       type: 'done.invoke.oauthMachine.getUserWithProvider:invocation[0]';
       data: unknown;
       __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'error.platform.oauthMachine.checkingIfLoggedIn:invocation[0]': {
+      type: 'error.platform.oauthMachine.checkingIfLoggedIn:invocation[0]';
+      data: unknown;
     };
     'done.invoke.oauthMachine.logInWithProvider:invocation[0]': {
       type: 'done.invoke.oauthMachine.logInWithProvider:invocation[0]';
@@ -40,7 +54,11 @@ export interface Typegen0 {
     checkIfLoggedIn: 'done.invoke.oauthMachine.checkingIfLoggedIn:invocation[0]';
   };
   missingImplementations: {
-    actions: 'showErrorMessage' | 'setProviderUserContext';
+    actions:
+      | 'showErrorMessage'
+      | 'setProviderUserContext'
+      | 'navigateToLogInPage'
+      | 'clearUserContext';
     services: 'logInWithProvider' | 'getUserWithProvider' | 'checkIfLoggedIn';
     guards: never;
     delays: never;
