@@ -13,4 +13,8 @@
 ### Check Interval
 [![checkIntervalMachine](https://stately.ai/registry/machines/6389be35-887a-4e9f-8de4-0935a00b72b7.png)](https://stately.ai/viz/6389be35-887a-4e9f-8de4-0935a00b72b7)
 
+### Post
+
+[![postMachine](https://stately.ai/registry/machines/2aa38647-42c1-4a78-b94e-c1cf7c16f02a.png)](https://stately.ai/viz/2aa38647-42c1-4a78-b94e-c1cf7c16f02a)
+
 ### Step By Step Process
