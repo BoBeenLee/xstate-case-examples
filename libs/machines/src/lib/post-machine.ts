@@ -1,15 +1,20 @@
 import { createMachine, assign, sendParent } from "xstate";
 
+interface PostItem {
+  id: string;
+  content: string;
+}
+
 export const postMachine =
-
-
-
-  /** @xstate-layout N4IgpgJg5mDOIC5QAcD2sAuBZAhgYwAsBLAOzADoIwMciAbcoiOsAYgDEBRAFQGEAJAPoAFAPIBlbohToiGIqhLSQAD0QAWAGyby6gJwBmABwAmE0YCMABj0B2PUYCsAGhABPRBa97yJvY8dTA3ULdS1NAF8I1zRMXEJSCioaekZmNgA5AEEANQBJAHEs7k5BblFBTgARPO48jILlWLkFJSRVRE0DE3JtR1tjWwtNW0cw1w8EAYNfPQsTK009c1s+qJj0bHxiMkpqWgYmFlYqzgAZHlKxSSbZeUVlNQRHB3IvdSMrWysjTRNNKzqCaeEz2chWAzWdRWMymD4mdYgWJbBK7ZIHcgAM2oqKgrAgigopAAbqgANYUZHxHZJfapbEYXEIEmoPA4e4kADaVgAurdYC0Hu0nuoAr4lpZHPN-D87MCEF4Rr5bL9Rf87EZVoiqdtEnsUgwGbjWGAAE6m1Cm8jIOjszGWgC21s21L16PpOJ2UGZJFJbI53L57WaHMeGjF6sl0scsts8usQ3IkJM+isAQh-wR0SRLt1aLpDDNFtNrAASjxSwBNEQSKTBu6tMMILQ+Ay2ewhIxhF4GeMwmbdPSdvRdCxSgza3Oo2kGvYseQkPEE3YsinOuJ5mcYqjz0jeln+1qB-mCtqgJ4AWgsoyTDgMMaMkMcIws8e8s2fgVMKvmRknG+nfVtzAXdFxNc1LWtW0MHtU0nR1QD3QYHdqD3H0-XZI9eRPUNhQ0Wx1HBRwTGvUIATTX54wMSFyHbEIrDHYYjDmWx-xRGkgPoVhsnyIoSjKCozjyG56wFXDz0QBYdHmKxAQcCwDGWYijHlaZZnmUVmPvCw5jY11dkgFpF0YEhkAAVwwVhqlqHDGzw551B6IZAU0aELEfTR+nlSEfE0OF1AMP5ZL+PTN3IQyFygcKICMpdCRM0k1wQjiIr3aLYvQ1lMMUY9RNPJsBiMIixm0b9iJMXt3EQYjHF6HShz0GFvgq0LANS4z2rxItIJtO1HXXdi9U69LIsyw8cuwvLxI6BynKhVyGI8ryqoQUELF6PRDFsBZuiMTULFalKYsi7jckKYpSnKQQhJEmQxLsiSECvMEDEBF5GtBVzqPlf4dAzRqBjCKF1EOobjr3U7eIugTBFObgsjyM5bKFR7oSK1Zgn2-QVX+VTqPUlNAkMKVdOzZK9ToIhMDSY4uD4IRrm4cRkbPGary8N4U1+hT9C6Qx5X6GYnEcbpFjbMc9tB3ZKepo5MjOvjLoqOGEaRqaHpmnoW30ZZlh0hZoRMeVfh8cw0y6PbNK0KWKBljAsU9CHlyJX1yUpKcOLth3GS9Mbsq5Sa7vy+yrwWXobDmdR20CSEBnlP51sfR8xma7abfIL2jS9cDiygvq4IG-Tbap+2s7Qg9-dyoPpsvGTw820Jo8fa9KsmGryE1EjqJePbPKzDYAM9kvwogkty24Ksa0kZn1ZRtnrCKlNtBbTbqI7eUo9sDvmIjkXqIhPQomzEhUCoeBRMG-NZzllmm00eZaIxyFHLHAJW88McZiHPwKo+UZ+n7jmQeboCze1xLfeyFUfBpgqr3Cq99XpxhWl4CEtFGqbScARBS5h05IRHsWCBj175OSfqEEiAQRZ9n6OQOwIxm6bQ+P0XBoCUKRUIZrcwvQSYES-PrPQ8YUxbwhM+GwmoiZfGYQadhTwDZcJ0jwvafD5QyiTMYKU-YvjfAnGTD2YNYomXMhgaRGgH73j2oYTyfltChB+p5DaYwRZaBhF2dOw1OrGKmO5WiskGLXgWC8VYP1AjkBFn4YYyxPJR0AeTAy4NFweOMEVMxWlLG-HvkCZBTgQmORhAELwj4QisR0cA6Ww8b6z1ZiKGYSxV4jnsBHI2K0ARFRjP8fQn1FhR3TpnR28SKlNgvMEapiCAT-APpQlaAQkkxiWPeUYIx9DdOHt1U0HiAobVqSMdBywBYPxFp5FygR+j3yWZgDxgylRdC+KMgEikJmTGhIRZipgfj5JeD8EGxTL5gHOYpdaVzVgwluf4d+Co9lSlCM+RyFU-B-iPkAA */
-  createMachine(
+  
+/** @xstate-layout N4IgpgJg5mDOIC5QAcD2sAuBZAhgYwAsBLAOzADoIwMciAbcoiOsAYgDEBRAFQGEAJAPoAFAPIBlbohToiGIqhLSQAD0QBGTQHZyAJgAcANgCshgMwBOAAzGzAFi1mANCACeiM+sPkLWrYf07Ky11XXV9C0MAXyiXNExcQlIKKhp6RmY2ADkAQQA1AEkAcRzuTkFuUUFOABEC7gKsouV4uQUlJFUNXV0LcnD1K319LTsgi3VjF3cEY31jcjt9MzNTW0MLa2jYkHjsfGIySmpaBiYWVhrOABkecrFJFtl5RWU1BHVLb19xu0MtCxmLSmaaIXSmRaGIZ+UJ2T7bOLofZJI6pU7kABm1BRUFYEEUFFIADdUABrCh7RKHFIndJYjA4hDE1B4HAvEgAbSsAF0nrA2q9Ou9NFZ1HoxtYLLorOY5rpQQgzIY7D4oTCzDLVlpdDFEQkDsljmkGPScawwAAnC2oC3kZB0NkYm0AWztSKphrRdOxhygTJIJNZ7K5vM6rXZbw0gzFuglVilmrlCt0AR8Fjsxkiyyh+mCxl1u3dBtRtIYlutFtYACUeFWAJoiCRSMPPdqRj6hKz9LQy3PqCzLOwWZNhciiybxqHxuwpnU7SnFmnG44seQkXH4o7M8lu-Uopfoqir0h+5lB9ohvkCjqgYVzPomTxmAwOIGOBUBLsz4xWOEhdRLMYdgFgu+5GoeYDHuu5pWjadoOhgToWq6oHUuB6RHtQJ7+oGbIXjyV4RkKGhfD4ozTv8gLAoYyZDIsfhaBEwwRL4+hznqyJoV6dCsLkhQlGUFRVNcBSPC2-JEbeYLRuQ5gJkYPT9kqCqrAsqyeJE-xhAOwQgUWYGQG066MCQyAAK4YKwtT1IRbbEQgmmyUMgSjPo-bGH4CqDL0PhWM+gIZn4fl6XuaGGWuUDkOFJ54gSJkkjuqGGtFxkpaeAYsnhiiXuJ17tpohi6IsvQMaMYxePKbiIIx3gpgC5W5j+v4hZxyUQEZkVpTBFbwY6Lq7q1RxpVF7URThmXBgRuWSV0DmGN4OYuUs7meVVDluT40rSoVPSmH8LUekNo0xXxxSlOUlSCCJYkyBJdlSR8GZij2cLhFYvRmEYCq+LVtijB5cLMQdi4jR1vH5GdgmXVc3A5AU1y2YKD2bGpQ7xtqdiWCE+gfnRoTGOEhiaB56jasDYF0EQmAZBcXB8EIDzcOIiM3rNYSk3oRgDoxAGY1oCrzH0Rg2LmH2BPG5NoZT1PnNkEMCRdVQw3DCPTfdbO6Cs5CWLo-gBDtmPJhtIRQuEmuikMmOS4a0sYJiPoxZuhIZYl+lS1Tdumr643ntlU23Xl9lhH55DZn8jGrICONrdYOiBEq-zGAYvhStbRy2-bDK+t1cH2n1yEDYdFAZ172FnllnL+4Wd1I2zgxmKHSrh8smafQLmih34Q4anMPYpmnxce1FsGVjW3D1o2kjM2rtfvGE0r9MqROZl4GbDmt-gNxEYwi5re35gWJCoFQ8DiYNB7pLLLP5SmDemBMn1hJj-z82tQJitosYrDKfjzAP6Emgduua+9lhgLHemVfwoR7AeRUgvSItgVjGFMDKQm-9uLDwrCAh6oRzDkHvp8NiAElSrRmOCBYJhmIzjCKYbUZh0GlhXFhYBM9WZ3m1HoRwmYrDQgiDKWifR4RxgiECTWDDjTYNmkYMUECxhQM1oFLyqxFhGAiJmTWA5NjsWrufUGEUTLmQwJI942Y9AeXBC-L+pNvrLHFG5MIGN4yxn-sNNKxiowznwQODMv5-AODmN9VMwIgTKlFF8RwLjjosIDjNExoQzHaloRjTwr8ZhqPIP4Aw5iUxyIPhxIu5AM5X1Ye2HoHDNDQM2O9SI-hvoATHDwz4Fgk7ph4cBecbsbZD1LtE6ugccHDC7G5ZBmwMw7yAgLPBgQ2IlRqssLQ-8M7lhtO4hAZSioVI0dYXo-waIbwHPgv8uYxiAwsIsj2qzwgQmGZmdMQEggTLWhsLs1h7BVKVL+IcA9VmMX0AkixfgrGpMQIVRYkRRRQiAp9EY9CYhRCAA */
+createMachine(
     {
-  context: { posts: [] },
+  context: { posts: {} },
   tsTypes: {} as import('./post-machine.typegen').Typegen0,
-  schema: { context: {} as { posts: string[] } },
+  schema: {
+    context: {} as { posts: Record<string, PostItem> }, // events: {} as { type: "done.invoke.postMachine.detail.FETCH_POST"}
+  },
   initial: 'list',
   states: {
     detail: {
@@ -33,6 +38,7 @@ export const postMachine =
             src: 'getPost',
             onDone: [
               {
+                actions: 'setPostContext',
                 target: 'idle',
               },
             ],
@@ -55,6 +61,7 @@ export const postMachine =
             src: 'deletePost',
             onDone: [
               {
+                actions: 'deletePostContext',
                 target: '#postMachine.list',
               },
             ],
@@ -87,6 +94,7 @@ export const postMachine =
             src: 'upsertPost',
             onDone: [
               {
+                actions: 'setPostContext',
                 target: '#postMachine.list',
               },
             ],
@@ -125,6 +133,7 @@ export const postMachine =
             src: 'getPosts',
             onDone: [
               {
+                actions: 'setPostsContext',
                 target: 'idle',
               },
             ],

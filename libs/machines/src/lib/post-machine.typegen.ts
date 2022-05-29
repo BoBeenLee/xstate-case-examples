@@ -2,8 +2,34 @@
 
 export interface Typegen0 {
   '@@xstate/typegen': true;
-  eventsCausingActions: {};
+  eventsCausingActions: {
+    setPostContext:
+      | 'done.invoke.postMachine.detail.fetching:invocation[0]'
+      | 'done.invoke.postMachine.editing.editing:invocation[0]';
+    deletePostContext: 'done.invoke.postMachine.detail.deleting:invocation[0]';
+    setPostsContext: 'done.invoke.postMachine.list.fetching:invocation[0]';
+  };
   internalEvents: {
+    'done.invoke.postMachine.detail.fetching:invocation[0]': {
+      type: 'done.invoke.postMachine.detail.fetching:invocation[0]';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'done.invoke.postMachine.editing.editing:invocation[0]': {
+      type: 'done.invoke.postMachine.editing.editing:invocation[0]';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'done.invoke.postMachine.detail.deleting:invocation[0]': {
+      type: 'done.invoke.postMachine.detail.deleting:invocation[0]';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'done.invoke.postMachine.list.fetching:invocation[0]': {
+      type: 'done.invoke.postMachine.list.fetching:invocation[0]';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
     'xstate.init': { type: 'xstate.init' };
   };
   invokeSrcNameMap: {
@@ -13,7 +39,7 @@ export interface Typegen0 {
     getPosts: 'done.invoke.postMachine.list.fetching:invocation[0]';
   };
   missingImplementations: {
-    actions: never;
+    actions: 'setPostContext' | 'deletePostContext' | 'setPostsContext';
     services: 'getPost' | 'deletePost' | 'upsertPost' | 'getPosts';
     guards: never;
     delays: never;
