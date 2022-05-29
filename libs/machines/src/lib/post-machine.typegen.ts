@@ -39,7 +39,7 @@ export interface Typegen0 {
     getPosts: 'done.invoke.postMachine.list.fetching:invocation[0]';
   };
   missingImplementations: {
-    actions: 'setPostContext' | 'deletePostContext' | 'setPostsContext';
+    actions: never;
     services: 'getPost' | 'deletePost' | 'upsertPost' | 'getPosts';
     guards: never;
     delays: never;
