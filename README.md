@@ -17,4 +17,14 @@
 
 [![postMachine](https://stately.ai/registry/machines/2aa38647-42c1-4a78-b94e-c1cf7c16f02a.png)](https://stately.ai/viz/2aa38647-42c1-4a78-b94e-c1cf7c16f02a)
 
+
+### File Uploading
+
+[![fileUploadMachine](https://stately.ai/registry/machines/5c6d34ae-4833-4186-a9e9-cf61690b493a.png)](https://stately.ai/viz/5c6d34ae-4833-4186-a9e9-cf61690b493a)
+
+
+### Push Notification
+
 ### Step By Step Process
+
+
