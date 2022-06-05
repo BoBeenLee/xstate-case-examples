@@ -7,14 +7,16 @@ export interface Typegen0 {
       | 'error.platform.pushNotificationMachine.permission.checking:invocation[0]'
       | 'error.platform.pushNotificationMachine.fetchingTokenAndDevice:invocation[0]';
     setTokenAndDeviceContext: 'done.invoke.pushNotificationMachine.fetchingTokenAndDevice:invocation[0]';
-    setPushPermissionConext:
+    setAllowPermissionConext:
       | 'done.invoke.pushNotificationMachine.permission.checking:invocation[0]'
       | 'done.invoke.pushNotificationMachine.permission.requestingPermission:invocation[0]'
-      | 'done.invoke.pushNotificationMachine.permission.checkingNotificationIfIOS:invocation[0]'
+      | 'done.invoke.pushNotificationMachine.permission.checkingNotificationIfIOS:invocation[0]';
+    setDenyPermissionConext:
       | 'error.platform.pushNotificationMachine.permission.checking:invocation[0]'
       | 'error.platform.pushNotificationMachine.permission.requestingPermission:invocation[0]'
+      | 'done.invoke.pushNotificationMachine.permission.checkingNotificationIfIOS:invocation[0]'
       | 'error.platform.pushNotificationMachine.permission.checkingNotificationIfIOS:invocation[0]';
-    setPushNotificationSubscription: 'done.invoke.pushNotificationMachine.fetchingTokenAndDevice:invocation[0]';
+    setPusnNotificationSubscription: 'done.invoke.pushNotificationMachine.fetchingTokenAndDevice:invocation[0]';
   };
   internalEvents: {
     'error.platform.pushNotificationMachine.permission.checking:invocation[0]': {
@@ -63,21 +65,13 @@ export interface Typegen0 {
     fetchTokenAndDevice: 'done.invoke.pushNotificationMachine.fetchingTokenAndDevice:invocation[0]';
   };
   missingImplementations: {
-    actions:
-      | 'showErrorMessage'
-      | 'setTokenAndDeviceContext'
-      | 'setPushPermissionConext'
-      | 'setPushNotificationSubscription';
+    actions: never;
     services:
       | 'fetchTokenAndDevice'
       | 'hasPermission'
       | 'requestPermission'
       | 'checkNotifications';
-    guards:
-      | 'pushPermissionIfAllowed'
-      | 'hasNotPermission'
-      | 'hasDeviceIfIOS'
-      | 'equalToGrant';
+    guards: never;
     delays: never;
   };
   eventsCausingServices: {
