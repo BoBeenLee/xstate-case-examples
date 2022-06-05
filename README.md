@@ -25,6 +25,8 @@
 
 ### Push Notification
 
+[![pushNotificationMachine](https://stately.ai/registry/machines/0c8193f4-4d6e-4a8f-ae52-0219cc6be734.png)](https://stately.ai/viz/0c8193f4-4d6e-4a8f-ae52-0219cc6be734)
+
 ### Step By Step Process
 
 ### Phone Verification
