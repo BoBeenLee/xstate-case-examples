@@ -16,6 +16,7 @@ export interface Typegen0 {
       | 'error.platform.pushNotificationMachine.permission.requestingPermission:invocation[0]'
       | 'done.invoke.pushNotificationMachine.permission.checkingNotificationIfIOS:invocation[0]'
       | 'error.platform.pushNotificationMachine.permission.checkingNotificationIfIOS:invocation[0]';
+    setPusnNotificationUnsubscription: 'xstate.init';
     setPusnNotificationSubscription: 'done.invoke.pushNotificationMachine.fetchingTokenAndDevice:invocation[0]';
   };
   internalEvents: {
