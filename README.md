@@ -27,7 +27,10 @@
 
 [![pushNotificationMachine](https://stately.ai/registry/machines/0c8193f4-4d6e-4a8f-ae52-0219cc6be734.png)](https://stately.ai/viz/0c8193f4-4d6e-4a8f-ae52-0219cc6be734)
 
+### Phone Verification
+
+[![phoneVerificationMachine](https://stately.ai/registry/machines/f27f37b8-cd79-4712-ae02-9a39ebe9e59d.png)](https://stately.ai/viz/f27f37b8-cd79-4712-ae02-9a39ebe9e59d)
+
 ### Step By Step Process
 
-### Phone Verification
 
