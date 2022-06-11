@@ -45,7 +45,7 @@ jobs:
       dependency_cache_key: ${{ steps.compute_lockfile_hash.outputs.hash }}
 
   storybook-deploy:
-    if: ${{ github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
