@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@xstate-case-examples/machines": ["libs/machines/src/index.ts"]
+      "@xstate-case-examples/machines": ["libs/machines/src/index.ts"],
+      "@xstate-case-examples/machines-storybook": [
+        "libs/machines-storybook/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
