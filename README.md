@@ -2,6 +2,11 @@
 
 - https://github.com/mattpocock/xstate-catalogue
 
+## Storybook
+
+- https://bobeenlee.github.io/xstate-usecase/machines-storybook/
+
+
 ## Diagram
 
 ### OAuth
