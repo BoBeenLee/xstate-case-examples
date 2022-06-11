@@ -5,7 +5,10 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "build-storybook": "nx run-many --target=build-storybook --projects=machines-storybook",
+    "machines-storybook:storybook": "nx run machines-storybook:storybook",
+    "machines-storybook:build-storybook": "nx run machines-storybook:build-storybook"
   },
   "private": true,
   "dependencies": {
