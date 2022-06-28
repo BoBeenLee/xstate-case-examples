@@ -2,31 +2,31 @@ import { createMachine, assign } from "xstate";
 
 export const shuffleMachine =
   
-/** @xstate-layout N4IgpgJg5mDOIC5SwBYFcBmGA2YCyAhgMYoCWAdmAHQAOBasYAxAAoAyAggJqKg0D2sUgBdS-crxAAPRAEYAHAGYqANgBM8gKya1OgOyaAnHsOaANCACec+VTWyADABYVDjYfkOHe+QF9fFqiYOPjEZJS02ASWFFCsHACqAMoAopICQqLikjIIelQOso56hWpOsnpO2oYW1giyulSympWazQ7qKiWa-oHoWLiEJBTUNFEx5HEAcikAGgAq6YIiYhJI0ogAtLJO+ZpaCurGsooOOrWIik5qVIqV8nqyhs8PhipOvSBBA6HDlEypNgpADCi3WGRW2XWuW2pyou3kb0UCjcChqVi28icBTUahUbRa5U0zg+n3I-AgcEk3xCQ3Co3ojCWmVWOS2jlsphUKgqJgqPMUaguCGRdmc-J83nkPNknxpgzCI0i0VizMha1AuSeKgKDweunxshlwpOtmaRTaAoc0ochjl-VpisoaqyGo2CG2jyo+za0rUx1O5wxHqNhgK1qK-rUtocgf8-iAA */
+/** @xstate-layout N4IgpgJg5mDOIC5SwBYFcBmGA2YCyAhgMYoCWAdmAHQAKBasYAxDQDICCAmoqAA4D2sUgBdS-cjxAAPRAEYAHAGYqANgBM8gKya1OgOyaAnHsOaANCACec+VTWyADABYVDjYfkOHe+QF9fFqiYOPjEZJS02ASWFFAs7ACqAMoAopICQqLikjIIelQOso56hWpOsnpO2oYW1giyulSympWazQ7qKiWa-oHoWLiEJBTUNFEx5HEAcikAGgAq6YIiYhJI0ogAtLJO+ZpaCurGsooOOrWIik5qVIqV8nqyhs8PhipOvSBBA6HDEUn9EJ4fgQagAeXITDBADFoUtMqscltrg4qPJDGo9K4OppFIpdBcEE5bE5FFojKTXI5NCpPt8gWERlQAcFBiDwVgoVN4StsutcptTqiVBVvIY8YoTi5zFYtpiCro9PYHsSHiLaQEvoDBozKExUqwUgBhRbrDK8tagAUnVG7dEqSWeZU1WUITbyJwKtQqNotcqaZwfT7kdnwdb0nV-Ub0Rg8rKWjZuxy2UwqEV6EwVEX4wmSuzOLM+bzyEWyOna37hUbjWJxxH8uRvAoPB66H2yUuEk62ZpFNrZhwlhyGcusytMlk-YGgqgQut8q1bfGyKiaa4Oj0dx6KNOE8pUcWGLxvK6KDxqN6jqe66iToHs2dYecJgVOJy27x6MkaeQX66EwVlB0fQt3eZ5nivBko2ZCtpzAZ8kTdFxPXfDNv3kX9DH-V1tg6VdiklIwTFcXZIMjKsEIbJCMKoVCv1-DC-zUACnhXJw3lYtosLUYcNX8IA */
 createMachine(
     {
+  tsTypes: {} as import('./shuffle-machine.typegen').Typegen0,
   on: {
     SELECT: {
       actions: 'setPlayingContext',
-      target: '.pause',
+      target: '.Pause',
     },
   },
-  initial: 'pause',
-  tsTypes: {} as import('./shuffle-machine.typegen').Typegen0,
+  initial: 'Pause',
   states: {
-    pause: {
+    Pause: {
       on: {
         PLAY: {
           actions: 'setPlayingStatus',
-          target: 'playing',
+          target: 'Playing',
         },
       },
     },
-    playing: {
+    Playing: {
       on: {
         PAUSE: {
           actions: 'setPauseStatus',
-          target: 'pause',
+          target: 'Pause',
         },
         NEXT: [
           {
@@ -34,9 +34,28 @@ createMachine(
             cond: 'IsShuffleModeAndHasNextPlaying',
           },
           {
-            target: 'pause',
+            target: 'Pause',
           },
         ],
+      },
+    },
+    ShuffleMode: {
+      initial: 'Off',
+      states: {
+        On: {
+          on: {
+            OFF: {
+              target: 'Off',
+            },
+          },
+        },
+        Off: {
+          on: {
+            ON: {
+              target: 'On',
+            },
+          },
+        },
       },
     },
   },

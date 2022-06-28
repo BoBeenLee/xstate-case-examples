@@ -27,6 +27,12 @@ export interface Typegen0 {
     IsShuffleModeAndHasNextPlaying: 'NEXT';
   };
   eventsCausingDelays: {};
-  matchesStates: 'pause' | 'playing';
+  matchesStates:
+    | 'Pause'
+    | 'Playing'
+    | 'ShuffleMode'
+    | 'ShuffleMode.On'
+    | 'ShuffleMode.Off'
+    | { ShuffleMode?: 'On' | 'Off' };
   tags: never;
 }
